@@ -1,22 +1,29 @@
 import { TOOLBAR_TABS } from "@/components/constants/features/editor";
-import GenzTabs, { type GenzTab } from "@/components/ui/core/Tabs/Index";
+import GenzTabs from "@/components/ui/core/Tabs/Index";
+import type { Editor } from "@tiptap/react";
+import EditorToolbarHome from "./EditorToolbarHome";
+import type { GenzTabProp } from "@/components/ui/core/Tabs/Tabs";
 
-const tabs = [
-  {
-    value: TOOLBAR_TABS.HOME,
-    content: <div>Home Content</div>,
-  },
-  {
-    value: TOOLBAR_TABS.LAYOUT,
-    content: <div>Layout Content</div>,
-  },
-] satisfies [GenzTab, ...GenzTab[]];
+interface EditorToolbarProps {
+  editor: Editor;
+}
 
-const EditorToolbar = () => {
+const EditorToolbar = ({ editor }: EditorToolbarProps) => {
+  const tabs: GenzTabProp[] = [
+    {
+      value: TOOLBAR_TABS.HOME,
+      content: <EditorToolbarHome editor={editor} />,
+    },
+    {
+      value: TOOLBAR_TABS.LAYOUT,
+      content: <div>Layout Content</div>,
+    },
+  ];
+
   return (
-    <div className="w-fit">
-      <GenzTabs tabs={tabs} />;
-    </div>
+    <header className="border-b bg-white px-4 shadow-xs">
+      <GenzTabs tabs={tabs} />
+    </header>
   );
 };
 

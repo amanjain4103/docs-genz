@@ -1,19 +1,20 @@
 import type { ReactNode } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export interface GenzTab {
+export interface GenzTabProp {
   value: string;
   content: ReactNode;
 }
 
 interface GenzTabsProps {
-  tabs: readonly [GenzTab, ...GenzTab[]];
+  tabs: readonly GenzTabProp[];
 }
 
 const GenzTabs = ({ tabs }: GenzTabsProps) => {
+  console.log({ tabs });
   return (
     <Tabs defaultValue={tabs[0].value} className="w-full">
-      <TabsList className="flex w-full">
+      <TabsList variant="line" className="flex">
         {tabs.map((tab) => (
           <TabsTrigger key={tab.value} value={tab.value}>
             {tab.value}
